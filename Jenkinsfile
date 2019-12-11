@@ -1,7 +1,8 @@
+@Library('jhenkins-shared-libs')
+
 pipeline {
     agent any
     stages {
-        def shell = isUnix() ? { sh } : { bat }
         stage('Build') {
             steps {
                 script {

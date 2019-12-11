@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                sh 'pyinstaller --onefile sources/add2vals.py'
+                shell 'pyinstaller --onefile sources/add2vals.py'
             }
             post {
                 success {

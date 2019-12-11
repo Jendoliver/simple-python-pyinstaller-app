@@ -24,5 +24,21 @@ pipeline {
                 }
             }
         }
+        stage('Deliver') {
+            steps {
+                shell 'pyinstaller --onefile sources/add2vals.py'
+            }
+            post {
+                success {
+                    script {
+                        def dest = 'dist/add2vals'
+                        if ( ! isUnix()) {
+                            dest += '.exe'
+                        }
+                        archiveArtifacts dest
+                    }
+                }
+            }
+        }
     }
 }

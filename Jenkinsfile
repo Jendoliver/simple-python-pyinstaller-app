@@ -30,7 +30,7 @@ pipeline {
                     script {
                         def dest = 'dist/add2vals'
                         if ( ! isUnix()) {
-                            archive += '.exe'
+                            dest += '.exe'
                         }
                         archiveArtifacts dest
                     }

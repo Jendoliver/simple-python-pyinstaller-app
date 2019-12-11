@@ -1,7 +1,11 @@
 def shell = isUnix() ? sh : bat
 
 pipeline {
-    agent node
+    agent {
+        node {
+            label 'nice'
+        }
+    }
     stages {
         stage('Build') {
             steps {

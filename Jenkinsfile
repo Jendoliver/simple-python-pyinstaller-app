@@ -1,12 +1,7 @@
-def shell = isUnix() ? sh : bat
-
 pipeline {
-    agent {
-        node {
-            label 'nice'
-        }
-    }
+    agent any
     stages {
+        def shell = isUnix() ? { sh } : { bat }
         stage('Build') {
             steps {
                 script {

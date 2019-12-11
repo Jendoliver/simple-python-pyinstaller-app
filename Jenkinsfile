@@ -2,19 +2,18 @@
 
 pipeline {
     agent any
+    options {
+        skipStagesAfterUnstable()
+    }
     stages {
         stage('Build') {
             steps {
-                script {
-                    shell 'python -m py_compile sources/add2vals.py sources/calc.py'
-                }
+                shell 'python -m py_compile sources/add2vals.py sources/calc.py'
             }
         }
         stage('Test') {
             steps {
-                script {
-                    shell 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
-                }
+                shell 'py.test --verbose --junit-xml test-reports/results.xml sources/test_calc.py'
             }
             post {
                 always {
@@ -28,7 +27,13 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts 'dist/add2vals'
+                    script {
+                        def dest = 'dist/add2vals'
+                        if ( ! isUnix()) {
+                            archive += '.exe'
+                        }
+                        archiveArtifacts dest
+                    }
                 }
             }
         }

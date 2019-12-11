@@ -1,13 +1,4 @@
-//@Library('jhenkins-shared-libs') _
-
-def shell(String command) {
-	if (isUnix()) {
-		sh command
-	}
-	else {
-		bat command
-	}
-}
+@Library('jhenkins-shared-libs') _
 
 pipeline {
     agent any

@@ -5,6 +5,9 @@ pipeline {
     options {
         skipStagesAfterUnstable()
     }
+    environment {
+        CI = 'true'
+    }
     stages {
         stage('Build') {
             steps {
